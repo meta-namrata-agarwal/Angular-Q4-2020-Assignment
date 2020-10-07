@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from '../../models/address.model';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -7,38 +9,28 @@ import { Address } from '../../models/address.model';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  name: string;
-  age: number;
-  email: string;
-  address: Address;
   hobbies: string[];
-  hello: any;
   isEdit: boolean = false;
-
-  constructor() { }
+  isAddHobby: boolean = false;
+  users: User[];
+  user: User;
+  constructor(private userService: UserService,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
-
-    this.name = 'John Doe';
-    this.email = 'test@test.com';
-    this.age = 30;
-    this.address = {
-      street: '50 Main st',
-      city: 'Boston',
-      state: 'MA'
-    }
+    this.getUser();
     this.hobbies = ['Write code', 'Watch movies', 'Listen to music'];
-    this.hello = 'hello';
-  
   }
-
-  onClick() {
-    this.name = 'Brad Traversy';
-    this.hobbies.push('New Hobby');
+  getUser(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    
+    this.userService.getUser(id)
+      .subscribe(user => this.user = user);
   }
 
   addHobby(hobby) {
-    console.log(hobby);
     this.hobbies.unshift(hobby);
     return false;
   }
@@ -49,5 +41,9 @@ export class UserComponent implements OnInit {
 
   toggleEdit() {
     this.isEdit = !this.isEdit;
+  }
+
+  toggleAddHobby() {
+    this.isAddHobby = !this.isAddHobby;
   }
 }

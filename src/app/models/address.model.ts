@@ -1,5 +1,9 @@
-export interface Address {
+import { Geo } from './geo.model';
+
+export interface Addresses {
   street: string,
   city: string,
-  state: string
+  suite: string,
+  zipcode: string,
+  geo: Geo
 }

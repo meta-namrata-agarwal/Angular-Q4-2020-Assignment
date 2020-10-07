@@ -14,7 +14,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getPosts()
-    .subscribe(posts => this.posts = posts);
+    .subscribe(posts => this.posts = posts.slice(1,15));
   }
 
 }
