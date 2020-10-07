@@ -10,11 +10,15 @@ import { UserService } from './services/user.service';
 import { AboutComponent } from './components/about/about.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostComponent } from './components/post/post.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 const appRoutes: Routes = [
-  { path: '', component: UserComponent },
+  { path: '', component: DashboardComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'posts', component: PostComponent }
+  { path: 'posts', component: PostComponent },
+  { path: 'users/:id', component: UserComponent },
+
 ];
 
 @NgModule({
@@ -23,12 +27,15 @@ const appRoutes: Routes = [
     UserComponent,
     AboutComponent,
     PostComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

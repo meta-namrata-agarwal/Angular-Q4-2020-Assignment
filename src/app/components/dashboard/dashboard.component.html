@@ -1,0 +1,13 @@
+<h1>Top Users</h1>
+<div class="row">
+  <div class="col-sm-3" *ngFor="let user of users">
+    <mat-card class="example-card" style="margin-bottom: 2%;">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title><a routerLink="/users/{{user.id}}">{{user.name}}</a></mat-card-title>
+        <mat-card-subtitle> {{user.email}} | {{user.address.street}} {{user.address.city}}, {{user.address.suite}}
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  </div>
